@@ -5,10 +5,9 @@ import {useMediaQuery} from "react-responsive";
 import {Room} from "./Room.jsx";
 import HeroLights from "./HeroLights.jsx";
 import Particles from "./Patricles.jsx";
-import {useGSAP} from '@gsap/react';
-import gsap from 'gsap';
 
 const HeroExperience = () => {
+
     const isTablet = useMediaQuery({query: '(max-width: 1024px)'});
     const isMobile = useMediaQuery({query: '(max-width: 768px)'});
 
