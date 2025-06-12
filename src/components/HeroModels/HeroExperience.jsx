@@ -4,6 +4,9 @@ import {OrbitControls} from "@react-three/drei";
 import {useMediaQuery} from "react-responsive";
 import {Room} from "./Room.jsx";
 import HeroLights from "./HeroLights.jsx";
+import Particles from "./Patricles.jsx";
+import {useGSAP} from '@gsap/react';
+import gsap from 'gsap';
 
 const HeroExperience = () => {
     const isTablet = useMediaQuery({query: '(max-width: 1024px)'});
@@ -13,6 +16,8 @@ const HeroExperience = () => {
         <Canvas camera={{position: [0, 0, 15], fov: 45}}>
 
             <HeroLights/>
+            <Particles
+            count={100}/>
             <OrbitControls
                 enablePan={false}
                 enableZoom={!isTablet}
