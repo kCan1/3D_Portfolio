@@ -3,7 +3,7 @@ import TitleHeader from "../components/TitleHeader.jsx";
 import {testimonials} from "../constants/index.js";
 import GlowCard from "../components/GlowCard.jsx";
 
-//testimonials
+//testimonials need to update
 
 const Testimonials = () => {
     return (
