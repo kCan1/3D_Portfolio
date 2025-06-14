@@ -1,11 +1,20 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import TitleHeader from "../components/TitleHeader.jsx";
 import ContactExperience from "../components/ContactExperience.jsx";
 import emailjs from '@emailjs/browser';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { motion, AnimatePresence } from "framer-motion";
 
 
-const Contacts = () => {
+
+
+const Contact = () => {
     const formRef = useRef(null);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+
 
     const [formData, setFormData] = useState({
         name: "",
@@ -23,6 +32,16 @@ const Contacts = () => {
         });
     };
 
+    useEffect(() => {
+        if (isModalOpen) {
+            const timer = setTimeout(() => {
+                setIsModalOpen(false);
+            }, 1000); // ⏳ auto-close after 1 seconds
+            return () => clearTimeout(timer); // clean up
+        }
+    }, [isModalOpen]);
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         //Handle form submission
@@ -35,8 +54,12 @@ const Contacts = () => {
                 import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
                 formRef.current,
                 import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+
             );
-            setFormData({ name: "", email: "", message: "" });
+            setFormData({ name: '', email: '', message: '' });
+            setIsModalOpen(true); // ✅ Show modal
+
+
         }catch (error) {
             console.log('EMAILJS ERROR',error);
         }finally {
@@ -48,8 +71,8 @@ const Contacts = () => {
 
     return (
 
-
         <section id={"contact"} className={"section-padding flex-center"}>
+
             <div className={"w-full h-full md:px-10 px-5"}>
 
                 <TitleHeader title={"Get In Touch With Me"}
@@ -70,6 +93,7 @@ const Contacts = () => {
                                         name="name"
                                         placeholder="Your name"
                                         onChange={handleChange}
+                                        value={formData.name}
                                         required
                                     />
                                 </div>
@@ -82,6 +106,7 @@ const Contacts = () => {
                                         name="email"
                                         placeholder="Your email"
                                         className={"w-full"}
+                                        value={formData.email}
                                         onChange={handleChange}
                                         required
                                     />
@@ -96,6 +121,7 @@ const Contacts = () => {
                                         rows="5"
                                         placeholder="Your message"
                                         className={"w-full"}
+                                        value={formData.message}
                                         onChange={handleChange}
                                         required
                                     ></textarea>
@@ -123,7 +149,34 @@ const Contacts = () => {
                     </div>
                 </div>
             </div>
+
+            {/*for mpop up*/}
+            <AnimatePresence>
+                {isModalOpen && (
+                    <div className="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center z-[9999]">
+                        <motion.div
+                            initial={{ y: 100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: 100, opacity: 0 }}
+                            transition={{
+                                duration: 0.6,
+                                ease: [0.25, 1, 0.5, 1],
+                            }}
+                            className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md text-center"
+                        >
+                            <h2 className="text-xl font-semibold mb-4">Message Sent!</h2>
+                            <p className="text-gray-700"> Thank you for getting in touch!</p>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
+
+
+
         </section>
+
     )
+
 }
-export default Contacts
+export default Contact

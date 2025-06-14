@@ -10,16 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.2.0",
     "@react-three/fiber": "^9.1.2",
     "@react-three/postprocessing": "^3.0.4",
     "@tailwindcss/vite": "^4.1.10",
+    "framer-motion": "^12.18.1",
     "gsap": "^3.13.0",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",
     "react-responsive": "^10.0.1",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.10",
     "three": "^0.177.0"
   },
