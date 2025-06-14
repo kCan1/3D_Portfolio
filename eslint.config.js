@@ -4,7 +4,30 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
+  // 👇 Ignore built files
   { ignores: ['dist'] },
+
+  // ✅ Node/Backend setup (for server.js and other backend files)
+  {
+    files: ['server.js'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: {
+        ...globals.node,
+        process: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+      },
+      parserOptions: {
+        sourceType: 'module',
+      },
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+    },
+  },
+
+  // ✅ Browser/Frontend setup (React files)
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
