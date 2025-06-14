@@ -168,7 +168,7 @@ const expCards = [
     title: "Full Stack Developer",
     date: "June 2020 - December 2024",
     responsibilities: [
-      "Led the development of Docker's web applications, focusing on scalability.",
+      "Led the development of PHP web applications, focusing on scalability.",
       "Worked with backend engineers to integrate APIs seamlessly with the frontend.",
       "Contributed to open-source projects that were used with the Docker ecosystem.",
     ],
